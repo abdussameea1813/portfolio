@@ -90,7 +90,7 @@ export default function ContactSection() {
               value={formData.message}
               onChange={handleChange}
               required
-              rows="5"
+              rows={5}
               className="w-full p-2 mt-1 rounded-lg bg-gray-700 border border-gray-600"
             ></textarea>
           </div>
