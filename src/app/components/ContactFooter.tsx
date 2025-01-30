@@ -11,15 +11,15 @@ export default function ContactSection() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
-
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     emailjs
       .send(
@@ -40,6 +40,7 @@ export default function ContactSection() {
         }
       );
   };
+  
 
   return (
     <section id="contact" className="bg-gray-900 text-gray-300 py-16">
