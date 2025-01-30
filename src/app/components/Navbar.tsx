@@ -1,13 +1,14 @@
 'use client';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Close menu when clicking outside
   useEffect(() => {
-    const closeMenu = (e) => {
-      if (isMenuOpen && !e.target.closest('nav')) {
+    const closeMenu = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (isMenuOpen && !target.closest('nav')) {
         setIsMenuOpen(false);
       }
     };
