@@ -1,13 +1,15 @@
-'use client';
-import photo from '@/assets/photo2.jpg';
-import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram } from 'react-icons/fa';
-
-export default function AboutSection() {
+import { motion } from "framer-motion";
+import dp from "../../assets/dp.jpg";
+const About = () => {
   return (
-    <section id="about" className="bg-gray-900 py-16 text-center text-gray-300">
-      <div className="container mx-auto px-6 md:px-0">
-        {/* Avatar */}
+    <motion.section
+      id="about"
+      className="py-24 bg-gray-900 text-white" // Dark background for consistency
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      <div className="max-w-screen-lg mx-auto text-center">
         <motion.div
           className="mx-auto w-40 h-40 rounded-full overflow-hidden mb-6"
           initial={{ opacity: 0 }}
@@ -15,13 +17,12 @@ export default function AboutSection() {
           transition={{ duration: 1 }}
         >
           <img
-            src={photo.src} // Replace with your image URL
+            src={dp.src}
             alt="Abdussameea Patel"
             className="w-full h-full object-cover"
           />
         </motion.div>
 
-        {/* Name & Description */}
         <motion.h2
           className="text-3xl md:text-4xl font-extrabold mb-4"
           initial={{ opacity: 0, y: -50 }}
@@ -30,48 +31,28 @@ export default function AboutSection() {
         >
           Abdussameea Patel
         </motion.h2>
+
         <motion.p
-          className="text-lg md:text-xl text-gray-400 mb-6"
+          className="text-xl max-w-xl mx-auto mb-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
+          transition={{ duration: 1, delay: 0.4 }}
         >
-          Frontend Developer | Passionate About Code, Design, and Innovation
+          I am a passionate web developer with a strong background in JavaScript, React, and Next.js. I love creating interactive and engaging user experiences.
         </motion.p>
 
-        {/* Social Media Icons */}
-        <motion.div
-          className="flex justify-center space-x-6 mb-6"
+        <motion.a
+          href="#projects"
+          className="bg-yellow-500 text-black text-lg px-6 py-3 rounded-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          <a href="https://github.com/abdussameea1813/" target="_blank" rel="noopener noreferrer">
-            <FaGithub className="text-3xl hover:text-gray-100 transition-colors" />
-          </a>
-          <a href="https://linkedin.com/in/abdussameea-patel" target="_blank" rel="noopener noreferrer">
-            <FaLinkedin className="text-3xl hover:text-gray-100 transition-colors" />
-          </a>
-          <a href="https://instagram.com/abdussameea1813" target="_blank" rel="noopener noreferrer">
-            <FaInstagram className="text-3xl hover:text-gray-100 transition-colors" />
-          </a>
-        </motion.div>
-
-        {/* Download CV Button */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          <a
-            href="/assets/Abdussameea Resume.docx" // Replace with the actual path to your CV
-            download="Abdussameea_Patel_CV.docx"
-            className="inline-block bg-blue-500 text-gray-900 font-bold py-2 px-6 rounded-lg hover:bg-blue-600 transition-colors"
-          >
-            Download CV
-          </a>
-        </motion.div>
+          Check My Work
+        </motion.a>
       </div>
-    </section>
+    </motion.section>
   );
-}
+};
+
+export default About;

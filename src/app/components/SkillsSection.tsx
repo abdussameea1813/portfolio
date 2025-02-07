@@ -10,91 +10,35 @@ export default function SkillsSection() {
         {/* Skills Title */}
         <motion.h2
           className="text-4xl md:text-5xl font-extrabold mb-12 text-white"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
         >
           My Skills
         </motion.h2>
 
         {/* Skill Icons */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* HTML Skill */}
-          <motion.div
-            className="skill-item p-8 rounded-lg bg-gray-800 hover:bg-gray-700 shadow-xl transition-all"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <FaHtml5 className="text-6xl text-orange-600 mx-auto mb-4" />
-            <p className="text-lg font-semibold">HTML5</p>
-          </motion.div>
-
-          {/* CSS Skill */}
-          <motion.div
-            className="skill-item p-8 rounded-lg bg-gray-800 hover:bg-gray-700 shadow-xl transition-all"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <FaCss3Alt className="text-6xl text-indigo-500 mx-auto mb-4" />
-            <p className="text-lg font-semibold">CSS3</p>
-          </motion.div>
-
-          {/* JavaScript Skill */}
-          <motion.div
-            className="skill-item p-8 rounded-lg bg-gray-800 hover:bg-gray-700 shadow-xl transition-all"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <FaJsSquare className="text-6xl text-yellow-500 mx-auto mb-4" />
-            <p className="text-lg font-semibold">JavaScript</p>
-          </motion.div>
-
-          {/* React Skill */}
-          <motion.div
-            className="skill-item p-8 rounded-lg bg-gray-800 hover:bg-gray-700 shadow-xl transition-all"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <FaReact className="text-6xl text-cyan-400 mx-auto mb-4" />
-            <p className="text-lg font-semibold">React</p>
-          </motion.div>
-
-          {/* Node.js Skill */}
-          <motion.div
-            className="skill-item p-8 rounded-lg bg-gray-800 hover:bg-gray-700 shadow-xl transition-all"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            <DiNodejs className="text-6xl text-green-500 mx-auto mb-4" />
-            <p className="text-lg font-semibold">Node.js</p>
-          </motion.div>
-
-          {/* Git Skill */}
-          <motion.div
-            className="skill-item p-8 rounded-lg bg-gray-800 hover:bg-gray-700 shadow-xl transition-all"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-          >
-            <DiGit className="text-6xl text-red-500 mx-auto mb-4" />
-            <p className="text-lg font-semibold">Git</p>
-          </motion.div>
-
-          {/* MongoDB Skill */}
-          <motion.div
-            className="skill-item p-8 rounded-lg bg-gray-800 hover:bg-gray-700 shadow-xl transition-all"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-          >
-            <DiMongodb className="text-6xl text-green-400 mx-auto mb-4" />
-            <p className="text-lg font-semibold">MongoDB</p>
-          </motion.div>
+          {['HTML5', 'CSS3', 'JavaScript', 'React', 'Node.js', 'Git', 'MongoDB'].map((skill, index) => (
+            <motion.div
+              key={index}
+              className="skill-item p-8 rounded-lg bg-gray-800 hover:bg-gray-700 shadow-xl transition-all"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.5, delay: 0.2 * index }}
+            >
+              {/* Icon for each skill */}
+              {index === 0 && <FaHtml5 className="text-6xl text-orange-600 mx-auto mb-4" />}
+              {index === 1 && <FaCss3Alt className="text-6xl text-indigo-500 mx-auto mb-4" />}
+              {index === 2 && <FaJsSquare className="text-6xl text-yellow-500 mx-auto mb-4" />}
+              {index === 3 && <FaReact className="text-6xl text-cyan-400 mx-auto mb-4" />}
+              {index === 4 && <DiNodejs className="text-6xl text-green-500 mx-auto mb-4" />}
+              {index === 5 && <DiGit className="text-6xl text-red-500 mx-auto mb-4" />}
+              {index === 6 && <DiMongodb className="text-6xl text-green-400 mx-auto mb-4" />}
+              <p className="text-lg font-semibold">{skill}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,94 +1,68 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Close menu when clicking outside
-  useEffect(() => {
-    const closeMenu = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (isMenuOpen && !target.closest('nav')) {
-        setIsMenuOpen(false);
-      }
-    };
-    document.addEventListener('click', closeMenu);
-    return () => document.removeEventListener('click', closeMenu);
-  }, [isMenuOpen]);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
+const Navbar = () => {
   const menuItems = [
-    { href: '#about', text: 'About' },
-    { href: '#education', text: 'Education' },
-    { href: '#skills', text: 'Skills' },
-    { href: '#projects', text: 'Projects' },
-    { href: '#contact', text: 'Contact' },
+    { text: 'Home', href: '#' },
+    { text: 'About', href: '#about' },
+    { text: 'Projects', href: '#projects' },
+    { text: 'Contact', href: '#contact' }
   ];
 
   return (
-    <nav className="bg-black text-white shadow-lg sticky top-0 z-50">
-      <div className="container mx-auto flex items-center justify-between p-4">
-        {/* Logo */}
-        <div className="text-2xl font-bold">
-          <a href="#" className="hover:text-gray-300">
+    <motion.nav
+      className="bg-gray-900 text-white p-4 fixed w-full top-0 z-10 shadow-xl"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: 'easeInOut' }}
+    >
+      <div className="max-w-screen-xl mx-auto flex justify-between items-center">
+        <motion.div
+          className="text-2xl font-bold"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 1 }}
+        >
+          <a href="#" className="hover:text-gray-300 transition-all duration-300 transform hover:scale-105">
             My Portfolio
           </a>
-        </div>
+        </motion.div>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Menu Items */}
         <div className="hidden md:flex space-x-6">
-          {menuItems.map((item) => (
-            <a
+          {menuItems.map((item, index) => (
+            <motion.a
               key={item.href}
               href={item.href}
-              className="hover:text-gray-300 transition-colors duration-300"
+              className="hover:text-gray-300 transition-all duration-300"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 * index, duration: 1, ease: 'easeOut' }}
+              whileHover={{
+                scale: 1.2,
+                color: '#FBBF24',
+                textShadow: '0 0 10px rgba(255, 255, 255, 0.6)',
+              }}
             >
               {item.text}
-            </a>
+            </motion.a>
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <div className="md:hidden">
-          <button
-            className="text-white focus:outline-none focus:ring-2 focus:ring-gray-400"
-            onClick={toggleMenu}
+          <motion.button
+            initial={{ opacity: 0, rotate: -90 }}
+            animate={{ opacity: 1, rotate: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="text-white transform hover:scale-110"
           >
-            ☰
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <div
-          className={`fixed top-0 right-0 h-full w-64 bg-black transform transition-transform duration-300 ease-in-out ${
-            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          } md:hidden`}
-        >
-          <div className="flex justify-end p-4">
-            <button
-              className="text-white focus:outline-none focus:ring-2 focus:ring-gray-400"
-              onClick={toggleMenu}
-            >
-              ✕
-            </button>
-          </div>
-          <div className="flex flex-col space-y-4 p-4">
-            {menuItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="hover:text-gray-300 transition-colors duration-300"
-                onClick={toggleMenu}
-              >
-                {item.text}
-              </a>
-            ))}
-          </div>
+            <i className="fas fa-bars"></i>
+          </motion.button>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
-}
+};
+
+export default Navbar;

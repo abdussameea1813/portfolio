@@ -1,18 +1,25 @@
 'use client';
 import { motion } from 'framer-motion';
-import { FaGithub } from 'react-icons/fa';
-import { FaExternalLinkAlt } from 'react-icons/fa'; // External link icon for live demo
-import project1 from '@/assets/project1.png'
-import project2 from '@/assets/project2.png'
-import project3 from '@/assets/project3.png'
-
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'; // External link icon for live demo
+import project1 from "@/assets/project1.png"
+import project2 from "@/assets/project2.png"
+import project3 from "@/assets/project3.png"
+import projects4 from "@/assets/projects4.png"
 const projects = [
+  {
+    title: "X - Clone",
+    description: "An X clone developed using MERN stack with all the functionalities such as create, like and comment on post. Signup and Login functionality is also implemented.",
+    image: projects4.src,
+    link: "https://github.com/abdussameea1813/X",
+    demo: "https://x-clone-xdca.onrender.com/",
+  }
+  ,
   {
     title: "Vanslife",
     description: "A React Router 6-based app for booking travel vans seamlessly and exploring van-life adventures.",
     image: project1.src,
     link: "https://github.com/abdussameea1813/van-life",
-    demo: "https://vannslife.netlify.app/" // Add your live demo link here
+    demo: "https://vannslife.netlify.app/"
   },
   {
     title: "Ecommerce Store",
@@ -23,21 +30,21 @@ const projects = [
   },
   {
     title: "Personal Portfolio",
-    description: "Description for project three. A UI/UX design project built with Figma and Tailwind CSS.",
+    description: "A UI/UX design project built with Figma and Tailwind CSS.",
     image: project3.src,
   },
-  // Add more projects as needed
+  
 ];
 
-export default function ProjectsSection() {
+export default function Projects() {
   return (
     <section id="projects" className="bg-gray-900 py-16 text-gray-300">
       <div className="container mx-auto px-6 md:px-0">
         <motion.h2
           className="text-4xl md:text-5xl font-extrabold mb-12 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
         >
           My Projects
         </motion.h2>
@@ -49,38 +56,62 @@ export default function ProjectsSection() {
               className="group relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
+              whileHover={{ scale: 1.05 }}
               transition={{ delay: 0.2 * index }}
             >
-              <img
+              {/* Image */}
+              <motion.img
                 src={project.image}
                 alt={project.title}
                 className="w-full h-56 object-cover group-hover:scale-110 transition-all duration-500"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 group-hover:opacity-0 transition-opacity duration-500"></div>
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <h3 className="text-xl font-semibold text-yellow-500 dark:text-yellow-500">{project.title}</h3>
-                <p className="text-sm font-semibold text-yellow-500 dark:text-yellow-500">
-  {project.description}
-</p>
-                <div className="mt-4">
-                  <a
+
+              <div className="p-4">
+                {/* Title and Description */}
+                <motion.h3
+                  className="text-xl font-semibold text-yellow-500 dark:text-yellow-500"
+                  initial={{ y: 10 }}
+                  animate={{ y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  {project.title}
+                </motion.h3>
+                <motion.p
+                  className="text-sm font-semibold text-gray-400"
+                  initial={{ y: 10 }}
+                  animate={{ y: 0 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  {project.description}
+                </motion.p>
+
+                {/* Links */}
+                <div className="mt-4 flex space-x-4">
+                  <motion.a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary inline-block text-lg hover:text-blue-400 mr-4"
+                    className="text-primary inline-block text-lg hover:text-blue-400"
+                    whileHover={{ scale: 1.1 }}
                   >
                     <FaGithub className="inline mr-2" />
                     View on GitHub
-                  </a>
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary inline-block text-lg hover:text-green-400"
-                  >
-                    <FaExternalLinkAlt className="inline mr-2" />
-                    View Demo
-                  </a>
+                  </motion.a>
+                  {project.demo && (
+                    <motion.a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary inline-block text-lg hover:text-green-400"
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <FaExternalLinkAlt className="inline mr-2" />
+                      View Demo
+                    </motion.a>
+                  )}
                 </div>
               </div>
             </motion.div>
