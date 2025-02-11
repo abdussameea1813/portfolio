@@ -1,7 +1,10 @@
 'use client';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const menuItems = [
     { text: 'Home', href: '#' },
     { text: 'About', href: '#about' },
@@ -28,7 +31,7 @@ const Navbar = () => {
           </a>
         </motion.div>
 
-        {/* Desktop Menu Items */}
+        {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6">
           {menuItems.map((item, index) => (
             <motion.a
@@ -38,11 +41,7 @@ const Navbar = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 * index, duration: 1, ease: 'easeOut' }}
-              whileHover={{
-                scale: 1.2,
-                color: '#FBBF24',
-                textShadow: '0 0 10px rgba(255, 255, 255, 0.6)',
-              }}
+              whileHover={{ scale: 1.2, color: '#FBBF24' }}
             >
               {item.text}
             </motion.a>
@@ -51,16 +50,32 @@ const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">
-          <motion.button
-            initial={{ opacity: 0, rotate: -90 }}
-            animate={{ opacity: 1, rotate: 0 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-white transform hover:scale-110"
-          >
-            <i className="fas fa-bars"></i>
-          </motion.button>
+          <button onClick={() => setIsOpen(!isOpen)} className="text-white">
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <motion.div
+          className="absolute top-16 left-0 w-full bg-gray-800 p-4 flex flex-col items-center space-y-4 md:hidden"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {menuItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="text-white text-lg hover:text-gray-300"
+              onClick={() => setIsOpen(false)}
+            >
+              {item.text}
+            </a>
+          ))}
+        </motion.div>
+      )}
     </motion.nav>
   );
 };
